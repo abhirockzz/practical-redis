@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -46,7 +45,7 @@ func main() {
 		appPort = "8080"
 	}
 
-	fmt.Println("starting recommendation service on port "+ appPort)
+	fmt.Println("starting recommendation service on port " + appPort)
 	log.Fatal(http.ListenAndServe(":"+appPort, r))
 }
 
