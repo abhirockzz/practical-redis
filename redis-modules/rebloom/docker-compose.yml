@@ -1,0 +1,17 @@
+version: '3'
+services:
+    rebloom-redis:
+        image: redislabs/rebloom
+        container_name: rebloom-redis
+        ports:
+            - '6379:6379'
+    articles-recommendation-service:
+        build: .
+        environment:
+            - REDIS_HOST=rebloom-redis
+            - REDIS_PORT=6379
+            - PORT=9090
+        ports:
+            - '8080:9090'
+        depends_on:
+            - rebloom-redis
