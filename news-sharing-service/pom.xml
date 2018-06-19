@@ -70,7 +70,7 @@
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.wordpress.simplydistributed.pracredis.Bootstrap</mainClass>
+                                    <mainClass>com.wordpress.simplydistributed.pracredis.newsapp.Bootstrap</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

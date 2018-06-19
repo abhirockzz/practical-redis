@@ -1,4 +1,4 @@
-package com.wordpress.simplydistributed.pracredis.api;
+package com.wordpress.simplydistributed.pracredis.newsapp.api;
 
 import com.wordpress.simplydistributed.pracredis.newsapp.RedisConnectionPool;
 

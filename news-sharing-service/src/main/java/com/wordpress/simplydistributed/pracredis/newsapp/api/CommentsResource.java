@@ -1,6 +1,6 @@
-package com.wordpress.simplydistributed.pracredis.api;
+package com.wordpress.simplydistributed.pracredis.newsapp.api;
 
-import com.wordpress.simplydistributed.pracredis.model.Comments;
+import com.wordpress.simplydistributed.pracredis.newsapp.model.Comments;
 import com.wordpress.simplydistributed.pracredis.newsapp.RedisConnectionPool;
 
 import java.util.List;

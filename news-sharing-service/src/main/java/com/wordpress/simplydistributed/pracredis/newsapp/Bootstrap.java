@@ -1,9 +1,9 @@
 package com.wordpress.simplydistributed.pracredis.newsapp;
 
-import com.wordpress.simplydistributed.pracredis.api.UpvotesResource;
-import com.wordpress.simplydistributed.pracredis.api.NewsItemResource;
-import com.wordpress.simplydistributed.pracredis.api.CommentsResource;
-import com.wordpress.simplydistributed.pracredis.api.NewUserRegistrationResource;
+import com.wordpress.simplydistributed.pracredis.newsapp.api.UpvotesResource;
+import com.wordpress.simplydistributed.pracredis.newsapp.api.NewsItemResource;
+import com.wordpress.simplydistributed.pracredis.newsapp.api.CommentsResource;
+import com.wordpress.simplydistributed.pracredis.newsapp.api.NewUserRegistrationResource;
 
 import java.io.IOException;
 import java.net.URI;

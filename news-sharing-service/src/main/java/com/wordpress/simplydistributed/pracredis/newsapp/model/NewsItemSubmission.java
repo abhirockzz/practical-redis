@@ -1,4 +1,4 @@
-package com.wordpress.simplydistributed.pracredis.model;
+package com.wordpress.simplydistributed.pracredis.newsapp.model;
 
 import java.util.Collections;
 import java.util.HashMap;

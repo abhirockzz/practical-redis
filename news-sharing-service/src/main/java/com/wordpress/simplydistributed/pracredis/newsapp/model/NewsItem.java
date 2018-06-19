@@ -1,4 +1,4 @@
-package com.wordpress.simplydistributed.pracredis.model;
+package com.wordpress.simplydistributed.pracredis.newsapp.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

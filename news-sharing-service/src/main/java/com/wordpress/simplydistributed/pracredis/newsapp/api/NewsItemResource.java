@@ -1,9 +1,9 @@
-package com.wordpress.simplydistributed.pracredis.api;
+package com.wordpress.simplydistributed.pracredis.newsapp.api;
 
 import com.wordpress.simplydistributed.pracredis.newsapp.RedisConnectionPool;
-import com.wordpress.simplydistributed.pracredis.model.NewsItems;
-import com.wordpress.simplydistributed.pracredis.model.NewsItemSubmission;
-import com.wordpress.simplydistributed.pracredis.model.NewsItem;
+import com.wordpress.simplydistributed.pracredis.newsapp.model.NewsItems;
+import com.wordpress.simplydistributed.pracredis.newsapp.model.NewsItemSubmission;
+import com.wordpress.simplydistributed.pracredis.newsapp.model.NewsItem;
 
 import java.util.Map;
 import java.util.Set;
