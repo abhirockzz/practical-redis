@@ -16,7 +16,7 @@
 
 As the name suggests, **Practical Redis** is a hands-on, code-driven guide to Redis. Each chapter is based on an application (simple to medium complexity) which demonstrates the usage of Redis and its capabilities (data structures, commands etc.). It is versatile in the sense that it does not focus on a single combination of library and language for the applications. Hopefully, it helps broaden your horizon as it did for me while I was developing the applications for this book
 
-The applications in the book are based on **Java** and [Golang](https://golang.org). The Java based Redis client libraries which have been used in this book include [Jedis](https://github.com/xetorthio/jedis), [Redisson](https://github.com/redisson/redisson) and [Lettuce](https://lettuce.io/) while [go-redis](https://github.com/go-redis/redis) is used as the client library for Golang. [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) are used to deploy the applications (along with Redis) since the goal is to allow you to run/test the applications quickly (single command) and see things in action rather than typing out multiple commands and spending time setting things up
+The applications in the book are based on **Java** and [Golang](https://golang.org). The Java based Redis client libraries which have been used in this book include [Jedis](https://github.com/xetorthio/jedis), [Redisson](https://github.com/redisson/redisson) and [Lettuce](https://lettuce.io/) while [go-redis](https://github.com/go-redis/redis) is used as the client library for Golang. [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) are used to deploy the applications (along with Redis) since the goal is to allow you to run/test the applications quickly (single command) and see things in action rather than spending time setting things up
 
 ## Summary of chapters
 
@@ -24,8 +24,9 @@ The applications in the book are based on **Java** and [Golang](https://golang.o
 
 Here is a quick outline of the book contents
 
-* [Redis: the basic data structures](news-sharing-app.md) - intro to core Redis data structures with a Java based news sharing app using the [Jedis](https://github.com/xetorthio/jedis) client
-* [Extending Redis with Redis Modules](redis-modules.md) - learn about the basics of [Redis Modules](https://redis.io/modules) and make use of [ReBloom](https://github.com/RedisLabsModules/rebloom/) in a Golang based recommendation service
+* **Hello Redis** - quick tour of Redis capabilities including its versatile data structures
+* **Redis: the basic data structures** - intro to core Redis data structures with a Java based news sharing app using the [Jedis](https://github.com/xetorthio/jedis) client
+* **Extending Redis with Redis Modules** - learn about the basics of [Redis Modules](https://redis.io/modules) and make use of [ReBloom](https://github.com/RedisLabsModules/rebloom/) in a Golang based recommendation service
 
 > ### Coming soon ...
 
