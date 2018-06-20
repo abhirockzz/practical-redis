@@ -1,0 +1,39 @@
+version: '3'
+services:
+    redis:
+        image: redis
+        container_name: redis
+        ports:
+            - '6379:6379'
+    tweets-ingestion-service:
+        build: tweets-producer
+        environment:
+            - REDIS_HOST=redis
+            - REDIS_PORT=6379
+            - PORT=9090
+        ports:
+            - '8080:9090'
+        depends_on:
+            - redis
+    tweets-consumer:
+        build: tweets-consumer
+        depends_on:
+            - redis
+        environment:
+            - REDIS_HOST=redis
+            - REDIS_PORT=6379
+            - TWITTER_TRACKED_TERMS=redis,java,database
+            - TWITTER_CONSUMER_KEY=s3cr3t
+            - TWITTER_CONSUMER_SECRET=s3cr3t
+            - TWITTER_ACCESS_TOKEN=s3cr3t
+            - TWITTER_ACCESS_TOKEN_SECRET=s3cr3t
+    tweets-stats-service:
+        build: tweets-stats
+        environment:
+            - REDIS_HOST=redis
+            - REDIS_PORT=6379
+            - PORT=9090
+        ports:
+            - '8081:9090'
+        depends_on:
+            - redis
