@@ -21,10 +21,10 @@ public final class ServiceLifecycleManager {
 
     private ServiceLifecycleManager() {
 
-        String _consumerKey = System.getenv().getOrDefault("TWITTER_CONSUMER_KEY", "GWHkZvPZV78MvKfEKO3wMAgHB");
-        String _consumerSecret = System.getenv().getOrDefault("TWITTER_CONSUMER_SECRET", "pfferqmVGgKu0fGOEYPQTbuPjZVImFqrXToqZAWY6c5SgeywNo");
-        String _accessToken = System.getenv().getOrDefault("TWITTER_ACCESS_TOKEN", "565672040-is2Bwmxvqv6ynBTp2yUJntJdvPK2vE99Uf4a8Ouu");
-        String _accessTokenSecret = System.getenv().getOrDefault("TWITTER_ACCESS_TOKEN_SECRET", "uBssoJk7gvlLgUVYWRcfSQLyxinOosEvt0FWrm3ngK8nw");
+        String _consumerKey = System.getenv().getOrDefault("TWITTER_CONSUMER_KEY", "s3c3rt");
+        String _consumerSecret = System.getenv().getOrDefault("TWITTER_CONSUMER_SECRET", "s3c3rt");
+        String _accessToken = System.getenv().getOrDefault("TWITTER_ACCESS_TOKEN", "s3c3rt");
+        String _accessTokenSecret = System.getenv().getOrDefault("TWITTER_ACCESS_TOKEN_SECRET", "s3c3rt");
 
         ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
         configurationBuilder.setOAuthConsumerKey(_consumerKey)
