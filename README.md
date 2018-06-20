@@ -26,14 +26,14 @@ Here is a quick outline of the book contents
 
 * **Hello Redis** - quick tour of Redis capabilities including its versatile data structures
 * **Redis: the basic data structures** - intro to core Redis data structures with a Java based news sharing app using the [Jedis](https://github.com/xetorthio/jedis) client
-* **Extending Redis with Redis Modules** - learn about the basics of [Redis Modules](https://redis.io/modules) and make use of [ReBloom](https://github.com/RedisLabsModules/rebloom/) in a Golang based recommendation service
+* **Extending Redis with Redis Modules** - learn about the basics of [Redis Modules](https://redis.io/modules) and make use of [ReBloom](https://github.com/RedisLabsModules/rebloom/) in a Go based recommendation service
+* **Tweet analysis service** - keep track of relevant tweets using a Java and Go based application which ingests tweets, consumes/processes them and produces queryable info in real time using `reliable queues` (Redis `LIST`s), `SET`s and `HASH`es
 
 > ### Coming soon ...
 
 The below chapters are work in progress on and will be made available in subsequent releases of this book
 
 * Pipelines and Transactions in Redis
-* Real time Tweet analysis service - ingest, push and analyze tweets with a combination of Java and Golang consumer services
 * Scalable chat application - Use Redis PubSub and Websocket to create a chat service
 * Stream processing with Redis - watch Redis Streams in action (new data structure in Redis 5.0)
 * Redis based Tracking service - thanks to combination of the Geo data type and Lua scripting capability in Redis
