@@ -1,7 +1,9 @@
-FROM maven:3.5-jdk-8-slim
-RUN mkdir /app
-WORKDIR /app
-COPY src /app/src
-COPY pom.xml /app
-RUN mvn clean install
-CMD ["java","-jar", "target/tweets-ingestion-service.jar"]
+FROM golang as build-stage
+WORKDIR /go/
+RUN go get -u github.com/go-redis/redis && go get -u github.com/gin-gonic/gin && go get -u github.com/dghubble/oauth1 && go get -u github.com/dghubble/go-twitter/twitter
+COPY src/ /go/src
+RUN cd /go/src && CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o tweets-producer
+
+FROM scratch
+COPY --from=build-stage /go/src/tweets-producer /
+CMD ["/tweets-producer"]

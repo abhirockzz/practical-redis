@@ -10,6 +10,11 @@ services:
         environment:
             - REDIS_HOST=redis
             - REDIS_PORT=6379
+            - TWITTER_TRACKED_TERMS=trump,realDonaldTrump,redis,golang,database,nosql
+            - TWITTER_CONSUMER_KEY=jcZ4Zurv9pHPbCw79SKThdTtT
+            - TWITTER_CONSUMER_SECRET=UkAy84LEh78Wu1zWScRuzmgUUgZJmA7ypfhusDseUzZS7XfFNf
+            - TWITTER_ACCESS_TOKEN=565672040-VR3w4E33tRPqE5zsDqvLHwFUmXciTjqcA5BOIRDh
+            - TWITTER_ACCESS_TOKEN_SECRET=PMZxLZjNZXoiyACjSEuNVaJWIQl6ldt1yDcmAB6zGNWHA
             - PORT=9090
         ports:
             - '8080:9090'
@@ -17,16 +22,11 @@ services:
             - redis
     tweets-consumer:
         build: tweets-consumer
-        depends_on:
-            - redis
         environment:
             - REDIS_HOST=redis
             - REDIS_PORT=6379
-            - TWITTER_TRACKED_TERMS=redis,java,database
-            - TWITTER_CONSUMER_KEY=s3cr3t
-            - TWITTER_CONSUMER_SECRET=s3cr3t
-            - TWITTER_ACCESS_TOKEN=s3cr3t
-            - TWITTER_ACCESS_TOKEN_SECRET=s3cr3t
+        depends_on:
+            - redis
     tweets-stats-service:
         build: tweets-stats
         environment:

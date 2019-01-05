@@ -13,50 +13,29 @@ import (
 const tweetRedisListName = "tweets"
 const tweetsProcessorListName = "tweets-processing-queue"
 
-var client *redis.Client
-
-func init() {
-
-	redisHost := os.Getenv("REDIS_HOST")
-	redisPort := os.Getenv("REDIS_PORT")
-
-	if redisHost == "" {
-		redisHost = "192.168.99.100"
-	}
-
-	if redisPort == "" {
-		redisPort = "6379"
-	}
-
-	redisCoordinate := redisHost + ":" + redisPort
-	fmt.Println("Redis server - " + redisCoordinate)
-
-	client = redis.NewClient(&redis.Options{Addr: redisCoordinate})
-	_, perr := client.Ping().Result()
-
-	if perr != nil {
-		fmt.Println("Could not connect to Redis " + perr.Error())
-	} else {
-		fmt.Println("Consumer connected to Redis...")
-	}
-}
-
 //1. reliable transfer (RPOPLPUSH) from list (tweets) to another list (tweets-processing-queue)
 //2. processing of tweet i.e. populating tweet details in HASHes and SETs
+var client *redis.Client
 
 func main() {
 
+	redisServer := getFromEnvOrDefault("REDIS_HOST", "localhost")
+	redisPort := getFromEnvOrDefault("REDIS_PORT", "6379")
+	client = redis.NewClient(&redis.Options{Addr: redisServer + ":" + redisPort})
+	_, pingErr := client.Ping().Result()
+	if pingErr != nil {
+		fmt.Println("could not connect to Redis due to " + pingErr.Error())
+		return
+	}
 	defer client.Close()
 
 	for {
 		tweetJSON, err := client.BRPopLPush(tweetRedisListName, tweetsProcessorListName, 0*time.Second).Result()
 		if err != nil {
-			fmt.Println("failed to push tweet info to " + tweetsProcessorListName)
+			fmt.Println("failed to push tweet info to "+tweetsProcessorListName, err.Error())
 		} else {
-			//fmt.Println("pushed " + tweetJSON + " to " + tweetsProcessorListName)
+			go process(tweetJSON) //done in a different goroutine
 		}
-
-		go process(tweetJSON) //done in a different goroutine
 	}
 
 }
@@ -69,7 +48,9 @@ func process(tweetJSON string) {
 	if unmarshalErr == nil {
 		fmt.Println("converted tweet to JSON", tweetObj)
 	}
-
+	if len(tweetObj.Terms) == 0 {
+		return
+	}
 	hashName := "tweet:" + tweetObj.TweetID
 	pipe := client.Pipeline()
 	pipe.HMSet(hashName, tweetObj.toMap())
@@ -88,12 +69,10 @@ func process(tweetJSON string) {
 	if pipeErr != nil {
 		fmt.Println("Pipeline execution error " + pipeErr.Error())
 	} else {
-		//fmt.Println("Pipeline executed successfully")
+		fmt.Println("Stored tweet data for analysis")
 		_, lRemErr := client.LRem(tweetsProcessorListName, 0, tweetJSON).Result()
 		if lRemErr != nil {
 			fmt.Println("unable to delete entry from list " + lRemErr.Error())
-		} else {
-			//fmt.Println("no. of elements removed ", num)
 		}
 	}
 
@@ -111,15 +90,22 @@ func (tweet *tweet) toMap() map[string]interface{} {
 	tweetDetailMap := make(map[string]interface{})
 	tweetDetailMap["tweet_id"] = tweet.TweetID
 	tweetDetailMap["tweeter"] = tweet.Tweeter
-	tweetDetailMap["text"] = tweet.Tweet
+	tweetDetailMap["tweet"] = tweet.Tweet
 	//iterate over tweet.Terms and convert in comma-separated string i.e. [x,y] = x,y
 	termsStr := ""
 	for _, term := range tweet.Terms {
 		termsStr = termsStr + term + ","
 	}
 	termsStrFinal := strings.TrimRight(termsStr, ",")
-	//fmt.Println("terms -- " + termsStrFinal)
 	tweetDetailMap["terms"] = termsStrFinal
 	tweetDetailMap["created_date"] = tweet.CreatedDate
 	return tweetDetailMap
+}
+func getFromEnvOrDefault(key, defaultValue string) string {
+	val := os.Getenv(key)
+	if val == "" {
+		val = defaultValue
+	}
+
+	return val
 }
